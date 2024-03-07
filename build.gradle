@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'io.quarkus'
+    id 'dev.clojurephant.clojure' version '0.8.0-beta.4'   //clojure plugin
 }
 
 repositories {
@@ -14,6 +15,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+    
+    implementation 'org.clojure:clojure:1.11.1'  //clojure language
 }
 
 group 'org.acme'
@@ -34,4 +37,21 @@ compileJava {
 
 compileTestJava {
     options.encoding = 'UTF-8'
+}
+
+//for clojurephant
+clojure {
+    builds {
+        main {
+            classpath.from = sourceSets.main.compileClasspath
+            aotAll()
+            //checkAll()
+            //reflection = 'silent'
+        }
+    }
+}
+
+tasks.named('compileJava') {
+    classpath += files(sourceSets.main.clojure.classesDirectory)
+
 }
