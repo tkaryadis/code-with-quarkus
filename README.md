@@ -1,6 +1,7 @@
 # Reproducible example using Clojurephant+Gradle+Quarkus
 
 Clojure classes are not visable from quarkus.
+Same code but in spring-webflux is working : https://github.com/tkaryadis/spring-demo
 
 To test it:
 ./gradlew quarkusDev
